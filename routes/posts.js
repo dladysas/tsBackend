@@ -4,6 +4,11 @@ const router = express.Router();
 const Post = require("../models/newTicket");
 const error_handler = require("../models/error");
 
+//Login page
+router.get('/', (req, res) => {
+  res.render('/login')
+})
+
 //Gets back all posts
 router.get("/", async (req, res) => {
   try {
