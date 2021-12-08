@@ -7,7 +7,7 @@ require("dotenv").config();
 const connectDB = require("./config/db");
 connectDB();
 
-require("./config/passport")(passport);
+
 
 const app = express();
 app.use(cors());
@@ -22,8 +22,9 @@ app.use(
 );
 
 //Passport middleware
-app.use(passport.initialize);
-app.use(passport.session);
+app.use(passport.initialize());
+app.use(passport.session());
+require("./config/passport")(passport);
 //Import routes
 const postsRoute = require('./routes/posts');
 const authRoute = require('./routes/auth')
@@ -31,13 +32,13 @@ const authRoute = require('./routes/auth')
 app.use("/posts", postsRoute);
 app.use('/auth', authRoute);
 
-
-app.get("/", (req, res) => {
-  res.send("Home");
+app.set('view engine', 'ejs');
+app.get('/', (req, res) => {
+  res.render('login');
 });
 
-app.get("/page", (req, res) => {
-  res.send("Page");
+app.get('/page', (req, res) => {
+  res.send('Page');
 });
 
 app.listen(process.env.PORT);

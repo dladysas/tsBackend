@@ -6,7 +6,7 @@ const error_handler = require("../models/error");
 
 //Login page
 router.get('/', (req, res) => {
-  res.render('/login')
+  res.send('login')
 })
 
 //Gets back all posts
